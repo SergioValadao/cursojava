@@ -9,19 +9,22 @@ import Classes.Empregados;
 import Classes.Terceirizados;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		
+		List<Terceirizados> lista = new ArrayList<>();
+			
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Digite o numero de funcionario:");
 		int qtd = sc.nextInt();
-
-		List<Empregados> lista = new ArrayList<>();
-		Terceirizados novo = new Terceirizados();
 		
-		for(int x=0; x<qtd; x++) {			
-			System.out.print("Numero de Matricula:");
+		Terceirizados novo;
+				
+		for(int x=0; x<qtd; x++) {
+			novo = new Terceirizados();
+			novo.setAdicional(0);
+			System.out.print("Numero de Matricula:");			
 			novo.setMatricula(sc.nextInt());
 			sc.nextLine();
 			System.out.print("Nome do funcionario:");			
@@ -34,18 +37,21 @@ public class Main {
 			char resp = sc.next().charAt(0) ;
 			if(resp == 's') {
 				System.out.println("Digite o valor adicional:") ;
-				novo.setAdicional(sc.nextDouble());
-				
-				System.out.printf("Matricula: %d , Nome funcionario: %s , Trabalhou: %d horas , Valor hora: %.2f , Adicional %.2f" , novo.getMatricula(), novo.getName(), novo.getHours(), novo.getValorhora(), novo.getAdicional());				
+				novo.setAdicional(sc.nextDouble());				
+				System.out.printf("Matricula: %d , Nome funcionario: %s , Trabalhou: %d horas , Valor hora: %.2f , Adicional %.2f%n" , novo.getMatricula(), novo.getName(), novo.getHours(), novo.getValorhora(), novo.getAdicional());				
 				
 			}else {
-				System.out.printf("Matricula: %d , Nome funcionario: %s , Trabalhou: %d horas , Valor hora: %.2f", novo.getMatricula(), novo.getName(), novo.getHours(), novo.getValorhora());
+				System.out.printf("Matricula: %d , Nome funcionario: %s , Trabalhou: %d horas , Valor hora: %.2f%n", novo.getMatricula(), novo.getName(), novo.getHours(), novo.getValorhora());
 			}
-			lista.add(x,novo);
-		}
+			lista.add(novo);
+			System.out.println();
+			
+		} 
+		System.out.println("Fim do Sistema\n");
 		
-		
-		
+		for(Terceirizados cc: lista) {		
+			System.out.printf("Matricula %d , Funcionario: %s, Salario: %.2f%n", cc.getMatricula(), cc.getName(), cc.getValorhora()*cc.getHours() + cc.getAdicional());
+		}				
 		
 		/*
 		Conta cc1 = new BussinesAcount(1001, "Sergio Valadao", "Não Sei", 1000.00, 500.00);
